@@ -1,0 +1,108 @@
+#+title: Lab2 Solution
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* Questions 1
+** What is fdisk utility used for?
+to manipulate disk partition table
+** Show the bootable device(s) on your machine, and identify which partition(s) are bootable.
+*** Output of fdisk -l:
+...
+Device         Start       End   Sectors  Size Type
+/dev/sdb1       2048     34815     32768   16M Microsoft reserved
+/dev/sdb2      34816 524285951 524251136  250G Microsoft basic data
+/dev/sdb3  524285952 659988479 135702528 64.7G Linux filesystem
+/dev/sdb4  659988480 863920127 203931648 97.2G Linux filesystem
+/dev/sdb5  958291968 975173631  16881664    8G Linux swap
+/dev/sdb6  975173632 976773134   1599503  781M EFI System
+/dev/sdb7  863920128 956194815  92274688   44G Linux filesystem
+/dev/sdb8  956194816 958291967   2097152    1G EFI System
+*** Answer
+/dev/sdb6 and /dev/sdb8 are bootable partitions
+
+** What is logical block address?
+is a scheme to index the locations of logical blocks of a device. Starts with LBA 0
+** Why did we specify the count, the bs, and the skip options when using dd?
+Number of blocks, block size, and how many blocks to skip
+** Why does a GPT formatted disk have the MBR?
+To maintain compatibility and protect GPT disk and from MBR-based disk utilities.
+** Name two differences between primary and logical partitions in an MBR partitioning scheme
+There can be only 4 primary partitions in MBR disk, while there can be many logical ones on top of an extended partition. Some operating systems cannot boot from a logical partition.
+
+
+* Questions 2
+** Why is Shim used to load the GRUB bootloader?
+To make Secure Boot mechanism work.
+** Can you locate your grub configuration file? Show the path.
+/boot/grub/grub.cfg
+Also, there is /etc/default/grub which can be used to generate a grub config using grub-mkconfig
+** According to the boot order, what is the third boot device on your computer? How did you check this?
+BootCurrent: 0003
+Timeout: 0 seconds
+BootOrder: 0003,0004,0009,0001,0002,0000,2001,0006,0005,2002,2003
+...
+Boot0009* Artix HD(10,GPT,...
+It's Artix on my hard drive, accoding to efibootmgr -v
+
+* Questions 3
+** How many inodes are in use on your system?
+#+begin_src bash
+df --output=source,iused
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Filesystem      IUsed
+dev               717
+run              1314
+/dev/sdb3      720461
+tmpfs               1
+tmpfs              22
+/dev/sdb4      677792
+/dev/sdb6           0
+tmpfs              71
+/dev/sda9       16193
+/dev/sda8       33171
+#+end_example
+
+** What is the filesystem type of the EFI partition?
+FAT32
+** What device is mounted at your root / directory? Show proof.
+#+begin_src bash
+lsblk
+#+end_src
+
+#+RESULTS:
+#+begin_example
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0 931.5G  0 disk
+...
+sdb      8:16   0 465.8G  0 disk
+├─sdb1   8:17   0    16M  0 part
+├─sdb2   8:18   0   250G  0 part
+├─sdb3   8:19   0  64.7G  0 part /
+├─sdb4   8:20   0  97.2G  0 part /home
+├─sdb5   8:21   0     8G  0 part [SWAP]
+├─sdb6   8:22   0   781M  0 part /boot
+├─sdb7   8:23   0    44G  0 part
+└─sdb8   8:24   0     1G  0 part
+#+end_example
+/dev/sdb3
+
+** What is your partition UUID?
+For PARTUUID:
+#+begin_src bash
+lsblk -dno PARTUUID /dev/sdb3
+#+end_src
+
+#+RESULTS:
+: fbef9613-fbf5-8445-8d1c-7a63709d1229
+
+** Show at least two methods of viewing the UUID of a block device.
+lsblk -dno UUID /dev/sdb3
+blkid
+
+** What is the function of /dev/zero?
+Source of zero bytes. Can be used with dd to fill a file with zeros.

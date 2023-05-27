@@ -1,0 +1,82 @@
+#+title: Lab5 Solution
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* Question 1
+#+begin_src bash
+echo "Username: $(whoami)"
+echo "Home Directory: $HOME"
+echo "Shell: $SHELL"
+echo "Hostname: $(hostname)"
+ipaddress="$(ip addr | grep -A5 "enp2s0f1:" | grep "inet .*" | awk '{print $2}')"
+echo "IP address: $ipaddress"
+#+end_src
+
+#+RESULTS:
+: Username: rinri
+: Home Directory: /home/rinri
+: Shell: /bin/zsh
+: Hostname: akemi
+: IP address: 10.244.1.78/24
+
+* Question 2
+#+begin_src bash
+HOME=lab5-solution.org # THIS IS DONE TO NOT MAKE HOME BACKUP WHEN EXPORTING
+sudo mkdir -p /var/backups
+FNAME="$(date '+/var/backups/home_backup_%b_%d_%Y_%H_%M_%S.tar.gz')"
+sudo tar caf $FNAME $HOME
+#+end_src
+
+#+RESULTS:
+
+* Question 3
+#+begin_src bash
+uname -svm
+
+w
+
+CUR_USERS="$(who | awk '{print $1}' | sort | uniq)"
+
+if [ -d "/sys/firmware/efi" ]; then
+    echo "EFI"
+else
+    echo "No EFI"
+fi
+
+lsblk -o "+PTTYPE" | sed 's/^\([A-Za-z]*\) \(.*\)gpt/\1*\2gpt/'
+
+efibootmgr | grep "Boot$(efibootmgr | grep "BootOrder" | awk '{print substr($2, 0, 4);}')"
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Linux #1 SMP PREEMPT_DYNAMIC Tue, 14 Feb 2023 22:08:08 +0000 x86_64
+ 23:43:06 up  9:31,  2 users,  load average: 0.94, 1.05, 0.96
+USER     TTY        LOGIN@   IDLE   JCPU   PCPU WHAT
+rinri    tty1      14:11    9:31m  7:29   0.00s xinit /home/rinri/.xinitrc -- /etc/X11/xinit/xserverrc :0 vt1 -keeptty -auth /tmp/serverauth.unEBAJdBrv
+root     tty2      14:46    8:56m  0.00s  0.00s -bash
+EFI
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS PTTYPE
+sda*     8:0    0 931.5G  0 disk             gpt
+├─sda1   8:1    0   499M  0 part             gpt
+├─sda2   8:2    0   100M  0 part             gpt
+├─sda3   8:3    0    16M  0 part             gpt
+├─sda4   8:4    0  42.4G  0 part             gpt
+├─sda5   8:5    0  38.8G  0 part             gpt
+├─sda6   8:6    0   100M  0 part             gpt
+├─sda7   8:7    0   3.1G  0 part             gpt
+├─sda8   8:8    0   315G  0 part /mnt/rec    gpt
+└─sda9   8:9    0 531.5G  0 part /mnt/data   gpt
+sdb*     8:16   0 465.8G  0 disk             gpt
+├─sdb1   8:17   0    16M  0 part             gpt
+├─sdb2   8:18   0   250G  0 part             gpt
+├─sdb3   8:19   0  64.7G  0 part /           gpt
+├─sdb4   8:20   0  97.2G  0 part /home       gpt
+├─sdb5   8:21   0     8G  0 part [SWAP]      gpt
+├─sdb6   8:22   0   781M  0 part /boot       gpt
+├─sdb7   8:23   0    44G  0 part             gpt
+└─sdb8   8:24   0     1G  0 part             gpt
+Boot0003* Arch BTW	HD(7,GPT,1d75b784-ef17-3c4d-9e74-0b058e17bf83,0x3a1ff800,0x18680f)/File(\vmlinuz-linux)72006f006f0074003d00500041005200540055005500490044003d00660062006500660039003600310033002d0066006200660035002d0038003400340035002d0038006400310063002d00370061003600330037003000390064003100320032003900200072006500730075006d0065003d00500041005200540055005500490044003d00660033003700300031003100360031002d0035006500350036002d0065003000340037002d0061006200640031002d00390063003600380034003100320030006400340061006400200072007700200069006e0069007400720064003d005c0069006e0069007400720061006d00660073002d006c0069006e00750078002e0069006d006700
+#+end_example

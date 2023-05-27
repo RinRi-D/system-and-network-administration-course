@@ -1,0 +1,148 @@
+#+title: Lab5 Solution
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* Question 1
+** What is a zombie process
+Zombie processes appear in parent-child process relationships. They are finished executing, but they are still in the process table. For example, when a child process finishes executing, but parent process didn't acknowledge it yet.
+** Finding zombie processes
+I created a zombie process using C and then run this command:
+#+begin_src bash
+bat zombie.c
+gcc zombie.c
+./a.out &
+ps aux | grep "defunct" | grep -v "grep"
+#+end_src
+
+#+RESULTS:
+#+begin_example
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main() {
+	pid_t p = fork();
+	if (p == 0) {
+		exit(0);
+	} else {
+		sleep(2);
+	}
+}
+rinri     178372  0.0  0.0      0     0 ?        Z    17:11   0:00 [a.out] <defunct>
+#+end_example
+So, using the last command I can find zombie processes. Let's say that I know that there is only one zombie process. To kill it, let's kill its parent process:
+#+begin_src bash
+kill -9 $(ps -o ppid= -p $(ps aux | grep -m 1 "defunct" | grep -v "grep" | awk '{print $2;}'))
+#+end_src
+
+#+RESULTS:
+
+By using this line, it's possible to create script to kill all the zombie processes.
+
+** kill vs killall vs pkill
+kill sends the specified signal to the given pid.
+killall sends the specified signal to all the processes by the given process name.
+pkill sends the specified signal to all the processes matching the given pattern.
+
+** top
+#+begin_src bash
+top -b -n 1 | head -n 5
+#+end_src
+
+#+RESULTS:
+: top - 17:29:37 up 52 min,  1 user,  load average: 0.97, 1.02, 1.18
+: Tasks: 283 total,   1 running, 282 sleeping,   0 stopped,   0 zombie
+: %Cpu(s):  3.8 us,  3.0 sy,  0.0 ni, 92.5 id,  0.0 wa,  0.0 hi,  0.8 si,  0.0 st
+: MiB Mem :  14886.6 total,   9247.6 free,   3192.2 used,   2446.7 buff/cache
+: MiB Swap:   8243.0 total,   8243.0 free,      0.0 used.  11272.0 avail Mem
+(Explaining the first evaluation, results may differ after export)
+The Tasks line says, that there is 283 total processes, 1 of them is currently running, others are sleeping. No stopeed and no zombie processes.
+The %Cpu(s) line says about processor utilization.
+(Taken from the Lab6 file)
+    us is the percent of time spent running user processes.
+    sy is the percent of time spent running the kernel.
+    ni is the percent of time spent running processes with manually configured nice values.
+    id is the percent of time idle (if high, CPU may be overworked).
+    wa is the percent of wait time (if high, CPU is waiting for I/O access).
+    hi is the percent of time managing hardware interrupts.
+    si is the percent of time managing software interrupts.
+    st is the percent of virtual CPU time waiting for access to physical CPU.
+    Values such as id, wa, and st help identify whether the system is overworked.
+
+** kill fun processes script
+#+begin_src bash
+bash -c "exec -a fun${RANDOM}process sleep infinity" &
+bash -c "exec -a fun${RANDOM}process sleep infinity" &
+bash -c "exec -a fun${RANDOM}process sleep infinity" &
+
+FUNPROCS="$(pgrep -f 'fun.*process.*infinity')"
+echo "Found $(echo "$FUNPROCS" | wc -l) processes:"
+echo "$FUNPROCS"
+for FUNPROC in $FUNPROCS
+do
+    kill -9 "$FUNPROC"
+    echo "killed $FUNPROC"
+done
+#+end_src
+
+#+RESULTS:
+: Found 3 processes:
+: 394357
+: 394358
+: 394359
+: killed 394357
+: killed 394358
+: killed 394359
+** Hello world
+#+begin_src bash
+bat helloworld.sh
+#+end_src
+
+#+RESULTS:
+: #!/bin/bash
+:
+: trap 'echo "Interrupt received"; exit' SIGUSR1
+: while :
+: do
+:     echo "Hello World"
+:     sleep 10
+: done
+
+To kill:
+kill -s SIGUSR1 "$(ps aux | grep "helloworld.sh" | grep -v "grep" | awk '{print $2}')"
+** System util
+#+begin_src bash
+bat status.sh
+#+end_src
+
+#+RESULTS:
+#+begin_example
+while :
+do
+    CPUUSAGE="$(top -b - n 1 | grep "Cpu" | awk '{print 100-$8}')%"
+    MEMUSAGE="$(free -h | grep "Mem" | awk '{print $3/$2*100}')%"
+    # disk usage for root directory
+    DISKUSAGE="$(df -h | awk '{ if ($6 == "/")
+    print $5;
+    }')"
+
+    echo "$(date) CPU: $CPUUSAGE Mem: $MEMUSAGE Disk:$DISKUSAGE" >> /var/log/system_utilization.log
+    sleep 15
+done
+#+end_example
+
+#+begin_src bash
+bat /var/log/system_utilization.log
+#+end_src
+
+#+RESULTS:
+: Thu Mar  9 07:09:13 PM MSK 2023 CPU: 43.2% Mem: 32.1429% Disk:70%
+: Thu Mar  9 07:09:29 PM MSK 2023 CPU: 45.7% Mem: 32.1429% Disk:70%
+: Thu Mar  9 07:09:44 PM MSK 2023 CPU: 34.1% Mem: 32.1429% Disk:70%
+: Thu Mar  9 07:09:59 PM MSK 2023 CPU: 28.5% Mem: 32.1429% Disk:70%
+: Thu Mar  9 07:10:14 PM MSK 2023 CPU: 22.5% Mem: 32.1429% Disk:70%
+: Thu Mar  9 07:10:30 PM MSK 2023 CPU: 34.8% Mem: 32.1429% Disk:70%
+: Thu Mar  9 07:10:45 PM MSK 2023 CPU: 37.6% Mem: 32.1429% Disk:70%
+: Thu Mar  9 07:11:00 PM MSK 2023 CPU: 29.8% Mem: 32.1429% Disk:70%

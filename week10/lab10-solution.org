@@ -1,0 +1,50 @@
+#+title: Lab9 Solution
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* Question 1
+I would use rsyslog and journald. Forward them to ELK stack and use it as a SIEM.
+There are many people people familiar with the ELK stack, and it's easy to scale it.
+
+* Question 2
+> sudo cat  /etc/rsyslog.d/auth-errors.conf
+auth.alert,authpriv.alert       /var/log/auth-errors
+
+[[./rsyslogpriority.jpg][rsyslogpriority
+]]
+
+* Question 3
+#+begin_src bash
+cat /etc/logrotate.d/httpd
+#+end_src
+
+#+RESULTS:
+: /var/log/httpd/*log {
+:    rotate 10
+:    compress
+:    missingok
+:    sharedscripts
+:    postrotate
+:       /usr/bin/systemctl reload httpd.service 2>/dev/null || true
+:    endscript
+: }
+
+'* */6 * * * logrotate /etc/logrotate.d/httpd
+
+[[./logrotate.jpg][logrotate
+]]
+
+* Question 4
+
+
+* Question 5
+in /etc/bashrc:
+
+export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug "$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" )"'
+
+in /etc/rsyslog.d/bash.conf
+local6.*    /var/log/commands.log
+
+Taken from https://unix.stackexchange.com/questions/664581/how-do-i-log-all-commands-executed-by-all-users

@@ -1,0 +1,187 @@
+#+title: Lab 1
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* About this document
+I use Org mode in Emacs to write documents and will use it throughout the course.
+It has a super useful feature: it can evaluate the code on the fly and save results in the buffer.
+Also it's easy to use latex inside Org mode. That's why I will use Org mode for this course.
+If there are any problems with that, please report in the comments in Moodle.
+
+* Exercise 1
+Code:
+#+begin_src bash
+lsb_release -a
+#+end_src
+
+#+RESULTS:
+: -e LSB Version:	n/a
+: -e Distributor ID:	Arch
+: -e Description:	Arch Linux
+: -e Release:	rolling
+: -e Codename:	n/a
+
+Code:
+#+begin_src bash
+whoami
+#+end_src
+
+#+RESULTS:
+: rinri
+
+Code:
+#+begin_src bash
+users
+#+end_src
+
+#+RESULTS:
+: rinri
+
+Code:
+#+begin_src bash
+pwd
+#+end_src
+
+#+RESULTS:
+: /home/rinri/edu/sna
+
+Code:
+#+begin_src bash
+ls -la
+#+end_src
+
+#+RESULTS:
+: total 224
+: drwxr-xr-x  2 rinri users   4096 Feb  2 15:47 .
+: drwxr-xr-x 25 rinri users   4096 Feb  2 14:13 ..
+: -rw-r--r--  1 rinri users  19950 Feb  2 15:50 lab1.html
+: -rw-r--r--  1 rinri users   6407 Feb  2 15:51 lab1.org
+: -rw-r--r--  1 rinri users 190030 Feb  2 15:45 lab1.pdf
+
+Code:
+#+begin_src bash
+cd ~/library
+ls -la
+#+end_src
+
+#+RESULTS:
+#+begin_example
+total 17260
+drwxr-xr-x   2 rinri users    4096 Jan  8 10:47 .
+drwx--x---+ 74 rinri users    4096 Feb  2 16:07 ..
+-rw-r--r--   1 rinri users 6556637 Jan  8 10:47 Andrew S. Tanenbaum - Modern Operating Systems.pdf
+lrwxrwxrwx   1 rinri users      38 Aug  3  2022 cormen-algos.pdf -> /home/rinri/data/docs/cormen-algos.pdf
+lrwxrwxrwx   1 rinri users      93 Aug  3  2022 genki -> /home/rinri/data/docs/Banno E., Ikeda Y., Ohno Y., Shinagawa Ch., Tokashiki K. - Genki - 2020
+-rw-r--r--   1 rinri users  213363 Jan  8 10:47 ipfs-p2p-file-system.pdf
+-rwxr-xr-x   1 rinri users      66 Aug  3  2022 library.sh
+-rw-r--r--   1 rinri users 2658531 Jan  8 10:47 Stroustrup B. - A Tour of C++ - Second Edition - 2018.pdf
+-rw-r--r--   1 rinri users 8220353 Jan  8 10:47 TRENCH_FREE_DIFFEQ_I.PDF
+#+end_example
+
+Code:
+#+begin_src bash
+cat /etc/shells
+#+end_src
+
+#+RESULTS:
+: # Pathnames of valid login shells.
+: # See shells(5) for details.
+:
+: /bin/sh
+: /bin/bash
+: /bin/zsh
+: /usr/bin/zsh
+: /usr/bin/git-shell
+: /bin/dash
+
+Code:
+#+begin_src bash
+echo "$SHELL"
+#+end_src
+
+#+RESULTS:
+: /bin/zsh
+
+* Questions
+** Using hostname command:
+Code:
+#+begin_src bash
+hostname
+#+end_src
+
+#+RESULTS:
+: akemi
+
+** Arch Linux.
+It's a rolling-release distribution. That's why there is no "version". I've been using it for several years. Used lsb_release -a command to check the info.
+
+** The root directory is "/"
+
+** /bin/bash vs /bin/sh
+/bin/bash is a path to the bash shell. Whereas /bin/sh, on most of the systems, is a symbolic link to a POSIX-compliant shell. In many cases, it's linked to bash. On my machine, it's dash (it's usually faster if the script is POSIX-compliant)
+
+Code:
+#+begin_src bash
+ls -l /bin/sh
+#+end_src
+
+#+RESULTS:
+: lrwxrwxrwx 1 root root 4 Jul  3  2022 /bin/sh -> dash
+
+** Bash manual
+a. --verbose - When verbose mode is used, bash doesn't hide extra information (prints it), including all the steps done of a script, bashrc commands, and other info.
+b. --help - shows help message
+c. --rcfile file - use "file" as a initialization file instead of ~/.bashrc
+** Linux distributions I want to try
+*** NixOS
+NixOS uses a unique package manager called nix that solves many problems of common package managers (e.g. apt), including dependency hell.
+Apart from the package manager, NixOS has single configuration file for the entire system.
+Moreover, NixOS saves different "states" of the OS, and a user can rollback, for example, to the yesterday's state of the OS if something breaks.
+*** Gentoo Linux
+Gentoo Linux also uses a unique package manager called Portage.
+To install software on Gentoo, Portage builds most of the packages from source and allows user to optimize the software for their own needs.
+Gentoo also allows to use OpenRC as an init system instead of systemd. Even though OpenRC doesn't have many features of systemd, it's significantly lighter and simpler than systemd.
+*** Artix Linux
+Artix Linux is essentially Arch Linux, but it gives several options for the init system, including OpenRC, runit, s6, and others.
+*** LFS
+LFS allows a user to build their own Linux distribution. I think it allows a user to learn many things about Linux.
+*** Alpine Linux
+Alpine Linux is a lightweight Linux distribution, since it uses musl libc instead of glibc and busybox instead of GNU coreutils. It's widely used in Docker Images, thus it's useful to learn Alpine Linux.
+** POSIX
+POSIX is a family of standards created to maintain compatibility between operating systems.
+For example, POSIX-compliant shell I mentioned earlier, is a shell that does things as mentioned in the POSIX standard for shells.
+If a script is POSIX-compliant, any POSIX-compliant shell can run it without issues and the script usually starts with #!/bin/sh
+Some of the information is taken from Wikipedia.
+** Advantages of POSIX standards
+If a program is written with POSIX in mind, then it should work on other POSIX OSes too. Thus the portability increases.
+Since POSIX standards are public, everyone can create programs that can work and communicate with other POSIX-compliant programs.
+** Slackware vs Debian
+Both distributions are old (29 years old), but both are still maintained.
+
+Slackware tries to be stable and simple, thus makes as few changes to the software as possible. It uses pkgtool package management system.
+There are not that many packages available in Slackware, but users can use third-party repositories to install software or update the system.
+Slackware has a small team of developers, whereas Debian is an popular distribution, that has many maintainers.
+
+Debian stable is widely used on servers, thanks to its stability and long-term support, while Debian unstable (rolling-release) and testing are used on PCs.
+Debian uses apt (with dpkg) package management system. There are many Linux distributions based on Debian, e.g. Ubuntu, MX linux, etc.
+** uname -a
+Code:
+#+begin_src bash
+uname -a
+#+end_src
+
+#+RESULTS:
+: Linux akemi 6.1.8-arch1-1 #1 SMP PREEMPT_DYNAMIC Tue, 24 Jan 2023 21:07:04 +0000 x86_64 GNU/Linux
+
+1. Kernel name:
+   Linux
+2. Hostname:
+   akemi
+3. Kernel release version and kernel version:
+   6.1.8-arch1-1 #1 SMP PREEMPT_DYNAMIC Tue, 24 Jan 2023 21:07:04 +0000
+4. Hardware platform name:
+   x86_64
+5. Operating system name:
+   GNU/Linux

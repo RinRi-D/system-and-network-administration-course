@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-02 Thu 23:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lab5 Solution Amirlan Sharipov (BS21-CS-01)</title>
+<meta name="author" content="Amirlan Sharipov (BS21-CS-01)" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lab5 Solution Amirlan Sharipov (BS21-CS-01)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc73e026">1. Question 1</a></li>
+<li><a href="#org1d63a7a">2. Question 2</a></li>
+<li><a href="#org4ea83ba">3. Question 3</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc73e026" class="outline-2">
+<h2 id="orgc73e026"><span class="section-number-2">1.</span> Question 1</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"Username: </span><span style="color: #89DDFF; font-weight: bold;">$(whoami)</span><span style="color: #c3e88d;">"</span>
+<span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"Home Directory: </span><span style="color: #f78c6c;">$</span><span style="color: #ffcb6b;">HOME</span><span style="color: #c3e88d;">"</span>
+<span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"Shell: </span><span style="color: #f78c6c;">$</span><span style="color: #ffcb6b;">SHELL</span><span style="color: #c3e88d;">"</span>
+<span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"Hostname: </span><span style="color: #89DDFF; font-weight: bold;">$(hostname)</span><span style="color: #c3e88d;">"</span>
+<span style="color: #ffcb6b;">ipaddress</span>=<span style="color: #c3e88d;">"</span><span style="color: #89DDFF; font-weight: bold;">$(ip addr | </span><span style="color: #89DDFF; font-weight: bold;">grep</span><span style="color: #89DDFF; font-weight: bold;"> -A5 "enp2s0f1:" | </span><span style="color: #89DDFF; font-weight: bold;">grep</span><span style="color: #89DDFF; font-weight: bold;"> "inet .*" | awk '{print </span><span style="color: #89DDFF; font-weight: bold;">$</span><span style="color: #89DDFF; font-weight: bold;">2</span><span style="color: #89DDFF; font-weight: bold;">}')</span><span style="color: #c3e88d;">"</span>
+<span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"IP address: </span><span style="color: #f78c6c;">$</span><span style="color: #ffcb6b;">ipaddress</span><span style="color: #c3e88d;">"</span>
+</pre>
+</div>
+
+<pre class="example">
+Username: rinri
+Home Directory: /home/rinri
+Shell: /bin/zsh
+Hostname: akemi
+IP address: 10.244.1.78/24
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1d63a7a" class="outline-2">
+<h2 id="org1d63a7a"><span class="section-number-2">2.</span> Question 2</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ffcb6b;">HOME</span>=lab5-solution.org <span style="color: #676E95;"># </span><span style="color: #676E95;">THIS IS DONE TO NOT MAKE HOME BACKUP WHEN EXPORTING</span>
+<span style="color: #c792ea;">sudo</span> <span style="color: #c792ea;">mkdir</span> -p /var/backups
+<span style="color: #ffcb6b;">FNAME</span>=<span style="color: #c3e88d;">"</span><span style="color: #89DDFF; font-weight: bold;">$(</span><span style="color: #89DDFF; font-weight: bold;">date</span><span style="color: #89DDFF; font-weight: bold;"> '+/var/backups/home_backup_%b_%d_%Y_%H_%M_%S.tar.gz')</span><span style="color: #c3e88d;">"</span>
+<span style="color: #c792ea;">sudo</span> tar caf $<span style="color: #ffcb6b;">FNAME</span> $<span style="color: #ffcb6b;">HOME</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4ea83ba" class="outline-2">
+<h2 id="org4ea83ba"><span class="section-number-2">3.</span> Question 3</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-bash">uname -svm
+
+w
+
+<span style="color: #ffcb6b;">CUR_USERS</span>=<span style="color: #c3e88d;">"</span><span style="color: #89DDFF; font-weight: bold;">$(who | awk '{print </span><span style="color: #89DDFF; font-weight: bold;">$</span><span style="color: #89DDFF; font-weight: bold;">1</span><span style="color: #89DDFF; font-weight: bold;">}' | sort | uniq)</span><span style="color: #c3e88d;">"</span>
+
+<span style="color: #89DDFF;">if</span> <span style="color: #c792ea;">[</span> -d <span style="color: #c3e88d;">"/sys/firmware/efi"</span> <span style="color: #c792ea;">]</span>; <span style="color: #89DDFF;">then</span>
+    <span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"EFI"</span>
+<span style="color: #89DDFF;">else</span>
+    <span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"No EFI"</span>
+<span style="color: #89DDFF;">fi</span>
+
+lsblk -o <span style="color: #c3e88d;">"+PTTYPE"</span> | sed <span style="color: #c3e88d;">'s/^\([A-Za-z]*\) \(.*\)gpt/\1*\2gpt/'</span>
+
+efibootmgr | <span style="color: #c792ea;">grep</span> <span style="color: #c3e88d;">"Boot</span><span style="color: #89DDFF; font-weight: bold;">$(efibootmgr | </span><span style="color: #89DDFF; font-weight: bold;">grep</span><span style="color: #89DDFF; font-weight: bold;"> "BootOrder" | awk '{print substr(</span><span style="color: #89DDFF; font-weight: bold;">$</span><span style="color: #89DDFF; font-weight: bold;">2</span><span style="color: #89DDFF; font-weight: bold;">, 0, 4)</span><span style="color: #c3e88d;">;}')"</span>
+</pre>
+</div>
+
+<pre class="example" id="orge8b7bd2">
+Linux #1 SMP PREEMPT_DYNAMIC Tue, 14 Feb 2023 22:08:08 +0000 x86_64
+ 23:55:56 up  9:44,  2 users,  load average: 1.35, 1.71, 1.34
+USER     TTY        LOGIN@   IDLE   JCPU   PCPU WHAT
+rinri    tty1      14:11    9:44m  8:14   0.00s xinit /home/rinri/.xinitrc -- /etc/X11/xinit/xserverrc :0 vt1 -keeptty -auth /tmp/serverauth.unEBAJdBrv
+root     tty2      14:46    9:09m  0.00s  0.00s -bash
+EFI
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS PTTYPE
+sda*     8:0    0 931.5G  0 disk             gpt
+├─sda1   8:1    0   499M  0 part             gpt
+├─sda2   8:2    0   100M  0 part             gpt
+├─sda3   8:3    0    16M  0 part             gpt
+├─sda4   8:4    0  42.4G  0 part             gpt
+├─sda5   8:5    0  38.8G  0 part             gpt
+├─sda6   8:6    0   100M  0 part             gpt
+├─sda7   8:7    0   3.1G  0 part             gpt
+├─sda8   8:8    0   315G  0 part /mnt/rec    gpt
+└─sda9   8:9    0 531.5G  0 part /mnt/data   gpt
+sdb*     8:16   0 465.8G  0 disk             gpt
+├─sdb1   8:17   0    16M  0 part             gpt
+├─sdb2   8:18   0   250G  0 part             gpt
+├─sdb3   8:19   0  64.7G  0 part /           gpt
+├─sdb4   8:20   0  97.2G  0 part /home       gpt
+├─sdb5   8:21   0     8G  0 part [SWAP]      gpt
+├─sdb6   8:22   0   781M  0 part /boot       gpt
+├─sdb7   8:23   0    44G  0 part             gpt
+└─sdb8   8:24   0     1G  0 part             gpt
+Boot0003* Arch BTW	HD(7,GPT,1d75b784-ef17-3c4d-9e74-0b058e17bf83,0x3a1ff800,0x18680f)/File(\vmlinuz-linux)72006f006f0074003d00500041005200540055005500490044003d00660062006500660039003600310033002d0066006200660035002d0038003400340035002d0038006400310063002d00370061003600330037003000390064003100320032003900200072006500730075006d0065003d00500041005200540055005500490044003d00660033003700300031003100360031002d0035006500350036002d0065003000340037002d0061006200640031002d00390063003600380034003100320030006400340061006400200072007700200069006e0069007400720064003d005c0069006e0069007400720061006d00660073002d006c0069006e00750078002e0069006d006700
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Amirlan Sharipov (BS21-CS-01)</p>
+<p class="date">Created: 2023-03-02 Thu 23:55</p>
+</div>
+</body>
+</html>

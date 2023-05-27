@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-02 Thu 16:34 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lab 1 Amirlan Sharipov (BS21-CS-01)</title>
+<meta name="author" content="Amirlan Sharipov (BS21-CS-01)" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lab 1 Amirlan Sharipov (BS21-CS-01)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org7571a9d">1. About this document</a></li>
+<li><a href="#orgf4668cc">2. Exercise 1</a></li>
+<li><a href="#orge29640a">3. Questions</a>
+<ul>
+<li><a href="#orge1aa2bd">3.1. Using hostname command:</a></li>
+<li><a href="#orgfd20bdc">3.2. Arch Linux.</a></li>
+<li><a href="#orge186e45">3.3. The root directory is &ldquo;/&rdquo;</a></li>
+<li><a href="#orgc55cfc1">3.4. /bin/bash vs /bin/sh</a></li>
+<li><a href="#org78ddece">3.5. Bash manual</a></li>
+<li><a href="#org65d1d72">3.6. Linux distributions I want to try</a>
+<ul>
+<li><a href="#orgf7d803e">3.6.1. NixOS</a></li>
+<li><a href="#org2fdefff">3.6.2. Gentoo Linux</a></li>
+<li><a href="#org9c9b380">3.6.3. Artix Linux</a></li>
+<li><a href="#org1bf8e90">3.6.4. LFS</a></li>
+<li><a href="#org896f88e">3.6.5. Alpine Linux</a></li>
+</ul>
+</li>
+<li><a href="#orgc4925a6">3.7. POSIX</a></li>
+<li><a href="#org520649a">3.8. Advantages of POSIX standards</a></li>
+<li><a href="#org7b5efac">3.9. Slackware vs Debian</a></li>
+<li><a href="#org12183b1">3.10. uname -a</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7571a9d" class="outline-2">
+<h2 id="org7571a9d"><span class="section-number-2">1.</span> About this document</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I use Org mode in Emacs to write documents and will use it throughout the course.
+It has a super useful feature: it can evaluate the code on the fly and save results in the buffer.
+Also it&rsquo;s easy to use latex inside Org mode. That&rsquo;s why I will use Org mode for this course.
+If there are any problems with that, please report in the comments in Moodle.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf4668cc" class="outline-2">
+<h2 id="orgf4668cc"><span class="section-number-2">2.</span> Exercise 1</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">lsb_release -a
+</pre>
+</div>
+
+<pre class="example">
+-e LSB Version:	n/a
+-e Distributor ID:	Arch
+-e Description:	Arch Linux
+-e Release:	rolling
+-e Codename:	n/a
+</pre>
+
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">whoami
+</pre>
+</div>
+
+<pre class="example">
+rinri
+</pre>
+
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">users
+</pre>
+</div>
+
+<pre class="example">
+rinri
+</pre>
+
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c792ea;">pwd</span>
+</pre>
+</div>
+
+<pre class="example">
+/home/rinri/edu/sna
+</pre>
+
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c792ea;">ls</span> -la
+</pre>
+</div>
+
+<pre class="example">
+total 224
+drwxr-xr-x  2 rinri users   4096 Feb  2 15:47 .
+drwxr-xr-x 25 rinri users   4096 Feb  2 14:13 ..
+-rw-r--r--  1 rinri users  20424 Feb  2 16:32 lab1.html
+-rw-r--r--  1 rinri users   6592 Feb  2 16:32 lab1.org
+-rw-r--r--  1 rinri users 190030 Feb  2 15:45 lab1.pdf
+</pre>
+
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c792ea;">cd</span> ~/library
+<span style="color: #c792ea;">ls</span> -la
+</pre>
+</div>
+
+<pre class="example" id="org95787e4">
+total 17260
+drwxr-xr-x   2 rinri users    4096 Jan  8 10:47 .
+drwx--x---+ 74 rinri users    4096 Feb  2 16:31 ..
+-rw-r--r--   1 rinri users 6556637 Jan  8 10:47 Andrew S. Tanenbaum - Modern Operating Systems.pdf
+lrwxrwxrwx   1 rinri users      38 Aug  3  2022 cormen-algos.pdf -&gt; /home/rinri/data/docs/cormen-algos.pdf
+lrwxrwxrwx   1 rinri users      93 Aug  3  2022 genki -&gt; /home/rinri/data/docs/Banno E., Ikeda Y., Ohno Y., Shinagawa Ch., Tokashiki K. - Genki - 2020
+-rw-r--r--   1 rinri users  213363 Jan  8 10:47 ipfs-p2p-file-system.pdf
+-rwxr-xr-x   1 rinri users      66 Aug  3  2022 library.sh
+-rw-r--r--   1 rinri users 2658531 Jan  8 10:47 Stroustrup B. - A Tour of C++ - Second Edition - 2018.pdf
+-rw-r--r--   1 rinri users 8220353 Jan  8 10:47 TRENCH_FREE_DIFFEQ_I.PDF
+</pre>
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c792ea;">cat</span> /etc/shells
+</pre>
+</div>
+
+<pre class="example">
+# Pathnames of valid login shells.
+# See shells(5) for details.
+
+/bin/sh
+/bin/bash
+/bin/zsh
+/usr/bin/zsh
+/usr/bin/git-shell
+/bin/dash
+</pre>
+
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c792ea;">echo</span> <span style="color: #c3e88d;">"</span><span style="color: #f78c6c;">$</span><span style="color: #ffcb6b;">SHELL</span><span style="color: #c3e88d;">"</span>
+</pre>
+</div>
+
+<pre class="example">
+/bin/zsh
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge29640a" class="outline-2">
+<h2 id="orge29640a"><span class="section-number-2">3.</span> Questions</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orge1aa2bd" class="outline-3">
+<h3 id="orge1aa2bd"><span class="section-number-3">3.1.</span> Using hostname command:</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">hostname
+</pre>
+</div>
+
+<pre class="example">
+akemi
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgfd20bdc" class="outline-3">
+<h3 id="orgfd20bdc"><span class="section-number-3">3.2.</span> Arch Linux.</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+It&rsquo;s a rolling-release distribution. That&rsquo;s why there is no &ldquo;version&rdquo;. I&rsquo;ve been using it for several years. Used lsb_release -a command to check the info.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge186e45" class="outline-3">
+<h3 id="orge186e45"><span class="section-number-3">3.3.</span> The root directory is &ldquo;/&rdquo;</h3>
+</div>
+
+<div id="outline-container-orgc55cfc1" class="outline-3">
+<h3 id="orgc55cfc1"><span class="section-number-3">3.4.</span> /bin/bash vs /bin/sh</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+/bin/bash is a path to the bash shell. Whereas /bin/sh, on most of the systems, is a symbolic link to a POSIX-compliant shell. In many cases, it&rsquo;s linked to bash. On my machine, it&rsquo;s dash (it&rsquo;s usually faster if the script is POSIX-compliant)
+</p>
+
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c792ea;">ls</span> -l /bin/sh
+</pre>
+</div>
+
+<pre class="example">
+lrwxrwxrwx 1 root root 4 Jul  3  2022 /bin/sh -&gt; dash
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org78ddece" class="outline-3">
+<h3 id="org78ddece"><span class="section-number-3">3.5.</span> Bash manual</h3>
+<div class="outline-text-3" id="text-3-5">
+<ol class="org-ol">
+<li>&#x2013;verbose - When verbose mode is used, bash doesn&rsquo;t hide extra information (prints it), including all the steps done of a script, bashrc commands, and other info.</li>
+<li>&#x2013;help - shows help message</li>
+<li>&#x2013;rcfile file - use &ldquo;file&rdquo; as a initialization file instead of ~/.bashrc</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org65d1d72" class="outline-3">
+<h3 id="org65d1d72"><span class="section-number-3">3.6.</span> Linux distributions I want to try</h3>
+<div class="outline-text-3" id="text-3-6">
+</div>
+<div id="outline-container-orgf7d803e" class="outline-4">
+<h4 id="orgf7d803e"><span class="section-number-4">3.6.1.</span> NixOS</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<p>
+NixOS uses a unique package manager called nix that solves many problems of common package managers (e.g. apt), including dependency hell.
+Apart from the package manager, NixOS has single configuration file for the entire system.
+Moreover, NixOS saves different &ldquo;states&rdquo; of the OS, and a user can rollback, for example, to the yesterday&rsquo;s state of the OS if something breaks.
+</p>
+</div>
+</div>
+<div id="outline-container-org2fdefff" class="outline-4">
+<h4 id="org2fdefff"><span class="section-number-4">3.6.2.</span> Gentoo Linux</h4>
+<div class="outline-text-4" id="text-3-6-2">
+<p>
+Gentoo Linux also uses a unique package manager called Portage.
+To install software on Gentoo, Portage builds most of the packages from source and allows user to optimize the software for their own needs.
+Gentoo also allows to use OpenRC as an init system instead of systemd. Even though OpenRC doesn&rsquo;t have many features of systemd, it&rsquo;s significantly lighter and simpler than systemd.
+</p>
+</div>
+</div>
+<div id="outline-container-org9c9b380" class="outline-4">
+<h4 id="org9c9b380"><span class="section-number-4">3.6.3.</span> Artix Linux</h4>
+<div class="outline-text-4" id="text-3-6-3">
+<p>
+Artix Linux is essentially Arch Linux, but it gives several options for the init system, including OpenRC, runit, s6, and others.
+</p>
+</div>
+</div>
+<div id="outline-container-org1bf8e90" class="outline-4">
+<h4 id="org1bf8e90"><span class="section-number-4">3.6.4.</span> LFS</h4>
+<div class="outline-text-4" id="text-3-6-4">
+<p>
+LFS allows a user to build their own Linux distribution. I think it allows a user to learn many things about Linux.
+</p>
+</div>
+</div>
+<div id="outline-container-org896f88e" class="outline-4">
+<h4 id="org896f88e"><span class="section-number-4">3.6.5.</span> Alpine Linux</h4>
+<div class="outline-text-4" id="text-3-6-5">
+<p>
+Alpine Linux is a lightweight Linux distribution, since it uses musl libc instead of glibc and busybox instead of GNU coreutils. It&rsquo;s widely used in Docker Images, thus it&rsquo;s useful to learn Alpine Linux.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc4925a6" class="outline-3">
+<h3 id="orgc4925a6"><span class="section-number-3">3.7.</span> POSIX</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+POSIX is a family of standards created to maintain compatibility between operating systems.
+For example, POSIX-compliant shell I mentioned earlier, is a shell that does things as mentioned in the POSIX standard for shells.
+If a script is POSIX-compliant, any POSIX-compliant shell can run it without issues and the script usually starts with #!/bin/sh
+Some of the information is taken from Wikipedia.
+</p>
+</div>
+</div>
+<div id="outline-container-org520649a" class="outline-3">
+<h3 id="org520649a"><span class="section-number-3">3.8.</span> Advantages of POSIX standards</h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+If a program is written with POSIX in mind, then it should work on other POSIX OSes too. Thus the portability increases.
+Since POSIX standards are public, everyone can create programs that can work and communicate with other POSIX-compliant programs.
+</p>
+</div>
+</div>
+<div id="outline-container-org7b5efac" class="outline-3">
+<h3 id="org7b5efac"><span class="section-number-3">3.9.</span> Slackware vs Debian</h3>
+<div class="outline-text-3" id="text-3-9">
+<p>
+Both distributions are old (29 years old), but both are still maintained.
+</p>
+
+<p>
+Slackware tries to be stable and simple, thus makes as few changes to the software as possible. It uses pkgtool package management system.
+There are not that many packages available in Slackware, but users can use third-party repositories to install software or update the system.
+Slackware has a small team of developers, whereas Debian is an popular distribution, that has many maintainers.
+</p>
+
+<p>
+Debian stable is widely used on servers, thanks to its stability and long-term support, while Debian unstable (rolling-release) and testing are used on PCs.
+Debian uses apt (with dpkg) package management system. There are many Linux distributions based on Debian, e.g. Ubuntu, MX linux, etc.
+</p>
+</div>
+</div>
+<div id="outline-container-org12183b1" class="outline-3">
+<h3 id="org12183b1"><span class="section-number-3">3.10.</span> uname -a</h3>
+<div class="outline-text-3" id="text-3-10">
+<p>
+Code:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">uname -a
+</pre>
+</div>
+
+<pre class="example">
+Linux akemi 6.1.8-arch1-1 #1 SMP PREEMPT_DYNAMIC Tue, 24 Jan 2023 21:07:04 +0000 x86_64 GNU/Linux
+</pre>
+
+
+<ol class="org-ol">
+<li>Kernel name:
+Linux</li>
+<li>Hostname:
+akemi</li>
+<li>Kernel release version and kernel version:
+6.1.8-arch1-1 #1 SMP PREEMPT_DYNAMIC Tue, 24 Jan 2023 21:07:04 +0000</li>
+<li>Hardware platform name:
+x86_64</li>
+<li>Operating system name:
+GNU/Linux</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Amirlan Sharipov (BS21-CS-01)</p>
+<p class="date">Created: 2023-02-02 Thu 16:34</p>
+</div>
+</body>
+</html>

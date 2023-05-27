@@ -1,0 +1,61 @@
+#+title: Lab7 Solution
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* Question 1
+** Cron job
+0 0 */5 * *		/home/rinri/edu/sna/backup.sh
+
+#+begin_src bash
+cat backup.sh
+#+end_src
+
+#+RESULTS:
+: FNAME="$(date '+/home/rinri/edu/sna/funny-dir_%b_%d_%Y_%H_%M_%S.tar.gz')"
+: tar caf "$FNAME" /home/rinri/edu/sna/funny-dir
+
+** Anacron
+1 	10	backup-anacron /home/rinri/edu/sna/backup-anacron.sh
+
+#+begin_src bash
+cat backup-anacron.sh
+#+end_src
+
+#+RESULTS:
+: #!/bin/bash
+: rm /home/rinri/edu/sna/funny-dir_*
+: FNAME="$(date '+/home/rinri/edu/sna/funny-dir_%b_%d_%Y_%H_%M_%S.tar.gz')"
+: tar caf "$FNAME" /home/rinri/edu/sna/funny-dir
+
+* Question 2
+** Cron job
+0 0 * * 0   /home/rinri/edu/sna/backup-nginx.sh
+
+#+begin_src bash
+cat backup-nginx.sh
+#+end_src
+
+#+RESULTS:
+: #!/bin/bash
+: rm /home/rinri/edu/sna/nginx-www_*
+: FNAME="$(date '+/home/rinri/edu/sna/nginx-www_%b_%d_%Y_%H_%M_%S.tar.gz')"
+: tar caf "$FNAME" /var/www/
+
+* Question 3
+5 * * * *		/home/rinri/edu/sna/log-info.sh "5 minutes after midnight everyday"
+
+0 10 * * 1-5	/home/rinri/edu/sna/log-info.sh "10:00 on weekdays"
+
+0 4 * * 1	/home/rinri/edu/sna/log-info.sh "4:00 on Monday"
+
+0 0 8-14 * 6    /home/rinri/edu/sna/log-info.sh "second saturday of the month"
+
+#+begin_src bash
+cat log-info.sh
+#+end_src
+
+#+RESULTS:
+: #!/bin/bash
+: echo "$(date '+%d-%m-%y %H:%M:%S') $1" >> /var/log/sna_cron.log

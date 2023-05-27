@@ -1,0 +1,161 @@
+#+title: Lab8 Solution
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* Question 1
+#+begin_src bash
+systemd-analyze
+systemd-analyze plot > systemd.svg
+#+end_src
+
+#+RESULTS:
+: Startup finished in 5.093s (firmware) + 122ms (loader) + 7.459s (kernel) + 4.545s (userspace) = 17.221s
+: graphical.target reached after 4.544s in userspace.
+
+#+ATTR_HTML: :width 1000px
+[[./systemd.svg]]
+
+* Question 2
+graphical.target -> multi-user.target -> basic.target -> sysinit.target
+
+#+begin_src bash
+cat /usr/lib/systemd/system/graphical.target
+cat /usr/lib/systemd/system/multi-user.target
+cat /usr/lib/systemd/system/basic.target
+cat /usr/lib/systemd/system/sysinit.target
+#+end_src
+
+#+RESULTS:
+#+begin_example
+#  SPDX-License-Identifier: LGPL-2.1-or-later
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+[Unit]
+Description=Graphical Interface
+Documentation=man:systemd.special(7)
+Requires=multi-user.target
+Wants=display-manager.service
+Conflicts=rescue.service rescue.target
+After=multi-user.target rescue.service rescue.target display-manager.service
+AllowIsolate=yes
+#  SPDX-License-Identifier: LGPL-2.1-or-later
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+[Unit]
+Description=Multi-User System
+Documentation=man:systemd.special(7)
+Requires=basic.target
+Conflicts=rescue.service rescue.target
+After=basic.target rescue.service rescue.target
+AllowIsolate=yes
+#  SPDX-License-Identifier: LGPL-2.1-or-later
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+[Unit]
+Description=Basic System
+Documentation=man:systemd.special(7)
+Requires=sysinit.target
+Wants=sockets.target timers.target paths.target slices.target
+After=sysinit.target sockets.target paths.target slices.target tmp.mount
+
+# We support /var, /tmp, /var/tmp, being on NFS, but we don't pull in
+# remote-fs.target by default, hence pull them in explicitly here. Note that we
+# require /var and /var/tmp, but only add a Wants= type dependency on /tmp, as
+# we support that unit being masked, and this should not be considered an error.
+RequiresMountsFor=/var /var/tmp
+Wants=tmp.mount
+#  SPDX-License-Identifier: LGPL-2.1-or-later
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+[Unit]
+Description=System Initialization
+Documentation=man:systemd.special(7)
+
+Wants=local-fs.target swap.target
+After=local-fs.target swap.target
+Conflicts=emergency.service emergency.target
+Before=emergency.service emergency.target
+#+end_example
+
+** Information taken from man pages:
+*** basic.target
+A special target unit covering basic boot-up.
+*** graphical.target
+A special target unit for setting up a graphical login screen. This pulls in multi-user.target.
+*** multi-user.target
+A special target unit for setting up a multi-user system (non-graphical). This is pulled in by graphical.target.
+*** sysinit.target
+This target pulls in the services required for system initialization.
+** Wants for sysinit.target
+Wants=local-fs.target swap.target
+Wants is used like Requires, but it's less strict, meaning that it can start if the "wanted" service doesn't exist or failed to start.
+In this case, it wants local filesystems and swap to start.
+
+* Question 3
+#+begin_src bash
+cat webserver.sh
+#+end_src
+
+#+RESULTS:
+: #!/bin/bash
+:
+: while true ; do
+:     STATS="<h1>Uptime</h1>$(uptime)\n<h1>Inode and disk usage</h1>$(df -ih)\n<h1>Mem usage</h1>$(free -h)\n<h1>Syslog</h1>$(tail -n 15 /var/log/syslog)\r\n\r\n"
+:     LEN=$(printf "%s" "$STATS" | wc -c)
+:     RES="HTTP/1.1 200OK\r\nContent-Length: $LEN\r\n\r\n"
+:     echo -e "$RES$STATS"| nc -l -p 1500;
+: done
+
+[Unit]
+Description=stats web server
+
+[Service]
+User=root
+ExecStart=/home/rinri/edu/sna/webserver.sh
+Restart=always
+CPUQuota=15%
+MemoryMax=256000000
+
+[Install]
+WantedBy=multi-user.target
+
+* Question 4
+#+begin_src bash
+cat update.sh
+#+end_src
+
+[Unit]
+Description=update package sources list
+
+[Service]
+User=root
+ExecStart=/home/rinri/edu/sna/update.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+Package: hellopackage
+Version: 1.0
+Architecture: all
+Maintainer: RinRi
+Depends: python3
+Description: Hello world

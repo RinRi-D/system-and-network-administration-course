@@ -1,0 +1,50 @@
+#+title: Lab3 Solution
+#+title: Amirlan Sharipov (BS21-CS-01)
+#+author: Amirlan Sharipov (BS21-CS-01)
+#+PROPERTY: header-args :results verbatim :exports both
+#+OPTIONS: ^:nil
+
+* Question 1
+Pipe takes stdout of one command and forwards it to another as stdin
+* Question 2
+File formats and conventions
+* Question 3
+#+begin_src bash
+which ls
+#+end_src
+
+#+RESULTS:
+: /usr/bin/ls
+* Question 4
+mv test_file.tot test_file.txt
+rename 's/tot/txt/' test-file.tot
+* Question 5
+#+begin_src bash
+echo -e "The location of hundreds of crab pots\nLittle Red Riding Hood\nThe location of hundreds of crab pots\nThe location of hundreds of crab pots\nThe sound of thunder\nEight hours in a row\nAll aboard\nEight hours in a row" | sort | uniq > newfile.txt; whoami >> newfile.txt
+#+end_src
+* Question 6
+ping 127.0.0.1 &> /dev/null
+* Question 7
+#+begin_src bash
+sort | nl -ba > output.txt
+#+end_src
+
+#+RESULTS:
+
+* Question 8
+cd /home/rinri/testdir
+cd ../../home/rinri/testdir
+cd ~/testdir
+cd; cd testdir
+* Question 9
+#+begin_src bash
+awk -F ':' '{print $7;}' /etc/passwd | sort | uniq
+#+end_src
+
+#+RESULTS:
+: /bin/bash
+: /bin/false
+: /bin/zsh
+: /sbin/nologin
+: /usr/bin/git-shell
+: /usr/bin/nologin

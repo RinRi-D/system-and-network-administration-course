@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-09 Thu 23:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lab2 Solution Amirlan Sharipov (BS21-CS-01)</title>
+<meta name="author" content="Amirlan Sharipov (BS21-CS-01)" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lab2 Solution Amirlan Sharipov (BS21-CS-01)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgab91f72">1. Questions 1</a>
+<ul>
+<li><a href="#org5b80d60">1.1. What is fdisk utility used for?</a></li>
+<li><a href="#org0c664e2">1.2. Show the bootable device(s) on your machine, and identify which partition(s) are bootable.</a>
+<ul>
+<li><a href="#orged3ed3c">1.2.1. Output of fdisk -l:</a></li>
+<li><a href="#orga4fdfef">1.2.2. Answer</a></li>
+</ul>
+</li>
+<li><a href="#orgb7c19d5">1.3. What is logical block address?</a></li>
+<li><a href="#orgd76c04a">1.4. Why did we specify the count, the bs, and the skip options when using dd?</a></li>
+<li><a href="#org396d8fc">1.5. Why does a GPT formatted disk have the MBR?</a></li>
+<li><a href="#org47988d3">1.6. Name two differences between primary and logical partitions in an MBR partitioning scheme</a></li>
+</ul>
+</li>
+<li><a href="#orgd07cf30">2. Questions 2</a>
+<ul>
+<li><a href="#org7dd9497">2.1. Why is Shim used to load the GRUB bootloader?</a></li>
+<li><a href="#orgdf33504">2.2. Can you locate your grub configuration file? Show the path.</a></li>
+<li><a href="#orge9d54d1">2.3. According to the boot order, what is the third boot device on your computer? How did you check this?</a></li>
+</ul>
+</li>
+<li><a href="#orgdc23d89">3. Questions 3</a>
+<ul>
+<li><a href="#orgd513e26">3.1. How many inodes are in use on your system?</a></li>
+<li><a href="#orge9e0733">3.2. What is the filesystem type of the EFI partition?</a></li>
+<li><a href="#org8478339">3.3. What device is mounted at your root / directory? Show proof.</a></li>
+<li><a href="#org3c9680d">3.4. What is your partition UUID?</a></li>
+<li><a href="#org9f79854">3.5. Show at least two methods of viewing the UUID of a block device.</a></li>
+<li><a href="#org4b16e3f">3.6. What is the function of /dev/zero?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgab91f72" class="outline-2">
+<h2 id="orgab91f72"><span class="section-number-2">1.</span> Questions 1</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org5b80d60" class="outline-3">
+<h3 id="org5b80d60"><span class="section-number-3">1.1.</span> What is fdisk utility used for?</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+to manipulate disk partition table
+</p>
+</div>
+</div>
+<div id="outline-container-org0c664e2" class="outline-3">
+<h3 id="org0c664e2"><span class="section-number-3">1.2.</span> Show the bootable device(s) on your machine, and identify which partition(s) are bootable.</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orged3ed3c" class="outline-4">
+<h4 id="orged3ed3c"><span class="section-number-4">1.2.1.</span> Output of fdisk -l:</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+&#x2026;
+Device         Start       End   Sectors  Size Type
+/dev/sdb1       2048     34815     32768   16M Microsoft reserved
+/dev/sdb2      34816 524285951 524251136  250G Microsoft basic data
+/dev/sdb3  524285952 659988479 135702528 64.7G Linux filesystem
+/dev/sdb4  659988480 863920127 203931648 97.2G Linux filesystem
+/dev/sdb5  958291968 975173631  16881664    8G Linux swap
+/dev/sdb6  975173632 976773134   1599503  781M EFI System
+/dev/sdb7  863920128 956194815  92274688   44G Linux filesystem
+/dev/sdb8  956194816 958291967   2097152    1G EFI System
+</p>
+</div>
+</div>
+<div id="outline-container-orga4fdfef" class="outline-4">
+<h4 id="orga4fdfef"><span class="section-number-4">1.2.2.</span> Answer</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+/dev/sdb6 and /dev/sdb8 are bootable partitions
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb7c19d5" class="outline-3">
+<h3 id="orgb7c19d5"><span class="section-number-3">1.3.</span> What is logical block address?</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+is a scheme to index the locations of logical blocks of a device. Starts with LBA 0
+</p>
+</div>
+</div>
+<div id="outline-container-orgd76c04a" class="outline-3">
+<h3 id="orgd76c04a"><span class="section-number-3">1.4.</span> Why did we specify the count, the bs, and the skip options when using dd?</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Number of blocks, block size, and how many blocks to skip
+</p>
+</div>
+</div>
+<div id="outline-container-org396d8fc" class="outline-3">
+<h3 id="org396d8fc"><span class="section-number-3">1.5.</span> Why does a GPT formatted disk have the MBR?</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+To maintain compatibility and protect GPT disk and from MBR-based disk utilities.
+</p>
+</div>
+</div>
+<div id="outline-container-org47988d3" class="outline-3">
+<h3 id="org47988d3"><span class="section-number-3">1.6.</span> Name two differences between primary and logical partitions in an MBR partitioning scheme</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+There can be only 4 primary partitions in MBR disk, while there can be many logical ones on top of an extended partition. Some operating systems cannot boot from a logical partition.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd07cf30" class="outline-2">
+<h2 id="orgd07cf30"><span class="section-number-2">2.</span> Questions 2</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org7dd9497" class="outline-3">
+<h3 id="org7dd9497"><span class="section-number-3">2.1.</span> Why is Shim used to load the GRUB bootloader?</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+To make Secure Boot mechanism work.
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf33504" class="outline-3">
+<h3 id="orgdf33504"><span class="section-number-3">2.2.</span> Can you locate your grub configuration file? Show the path.</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+/boot/grub/grub.cfg
+Also, there is /etc/default/grub which can be used to generate a grub config using grub-mkconfig
+</p>
+</div>
+</div>
+<div id="outline-container-orge9d54d1" class="outline-3">
+<h3 id="orge9d54d1"><span class="section-number-3">2.3.</span> According to the boot order, what is the third boot device on your computer? How did you check this?</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+BootCurrent: 0003
+Timeout: 0 seconds
+BootOrder: 0003,0004,0009,0001,0002,0000,2001,0006,0005,2002,2003
+&#x2026;
+Boot0009* Artix HD(10,GPT,&#x2026;
+It&rsquo;s Artix on my hard drive, accoding to efibootmgr -v
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdc23d89" class="outline-2">
+<h2 id="orgdc23d89"><span class="section-number-2">3.</span> Questions 3</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgd513e26" class="outline-3">
+<h3 id="orgd513e26"><span class="section-number-3">3.1.</span> How many inodes are in use on your system?</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-bash">df --output=source,iused
+</pre>
+</div>
+
+<pre class="example" id="org1e237a1">
+Filesystem      IUsed
+dev               717
+run              1314
+/dev/sdb3      720461
+tmpfs               1
+tmpfs              26
+/dev/sdb4      677813
+/dev/sdb6           0
+tmpfs              71
+/dev/sda9       16193
+/dev/sda8       33171
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge9e0733" class="outline-3">
+<h3 id="orge9e0733"><span class="section-number-3">3.2.</span> What is the filesystem type of the EFI partition?</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+FAT32
+</p>
+</div>
+</div>
+<div id="outline-container-org8478339" class="outline-3">
+<h3 id="org8478339"><span class="section-number-3">3.3.</span> What device is mounted at your root / directory? Show proof.</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+<pre class="src src-bash">lsblk
+</pre>
+</div>
+
+<pre class="example" id="org1ee58fc">
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0 931.5G  0 disk 
+├─sda1   8:1    0   499M  0 part 
+├─sda2   8:2    0   100M  0 part 
+├─sda3   8:3    0    16M  0 part 
+├─sda4   8:4    0  42.4G  0 part 
+├─sda5   8:5    0  38.8G  0 part 
+├─sda6   8:6    0   100M  0 part 
+├─sda7   8:7    0   3.1G  0 part 
+├─sda8   8:8    0   315G  0 part /mnt/rec
+└─sda9   8:9    0 531.5G  0 part /mnt/data
+sdb      8:16   0 465.8G  0 disk 
+├─sdb1   8:17   0    16M  0 part 
+├─sdb2   8:18   0   250G  0 part 
+├─sdb3   8:19   0  64.7G  0 part /
+├─sdb4   8:20   0  97.2G  0 part /home
+├─sdb5   8:21   0     8G  0 part [SWAP]
+├─sdb6   8:22   0   781M  0 part /boot
+├─sdb7   8:23   0    44G  0 part 
+└─sdb8   8:24   0     1G  0 part 
+</pre>
+<p>
+/dev/sdb3
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3c9680d" class="outline-3">
+<h3 id="org3c9680d"><span class="section-number-3">3.4.</span> What is your partition UUID?</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+For PARTUUID:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">lsblk -dno PARTUUID /dev/sdb3
+</pre>
+</div>
+
+<pre class="example">
+fbef9613-fbf5-8445-8d1c-7a63709d1229
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9f79854" class="outline-3">
+<h3 id="org9f79854"><span class="section-number-3">3.5.</span> Show at least two methods of viewing the UUID of a block device.</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+lsblk -dno UUID /dev/sdb3
+blkid
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4b16e3f" class="outline-3">
+<h3 id="org4b16e3f"><span class="section-number-3">3.6.</span> What is the function of /dev/zero?</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+Source of zero bytes. Can be used with dd to fill a file with zeros.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Amirlan Sharipov (BS21-CS-01)</p>
+<p class="date">Created: 2023-02-09 Thu 23:36</p>
+</div>
+</body>
+</html>

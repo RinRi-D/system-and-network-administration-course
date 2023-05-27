@@ -1,0 +1,9 @@
+2022/09/18 13:25:34 wazuh-remoted: INFO: Remote syslog allowed from: 'xxx.xxx.xxx.xxx/xx'
+2022/09/18 13:25:34 wazuh-remoted: INFO: Remote syslog allowed from: '10.410.15.0/24'
+2022/09/18 13:25:34 wazuh-remoted: ERROR: Remote syslog blocked from: 'xxx.xxx.xxx.xxx/xx'
+2022/09/18 13:25:34 wazuh-remoted: INFO: Remote syslog allowed from: 'xxx.xxx.xxx.xxx/xx'
+2022/09/18 13:25:35 wazuh-remoted: WARNING: Remote syslog not parsed from: 'xxx.xxx.xxx.xxx/xx'
+2022/09/18 13:25:35 wazuh-remoted: ERROR: Remote syslog blocked from: 'xxx.xxx.xxx.xxx/xx'
+Log1 2022/09/18 13:25:35 wazuh-remoted: INFO: Remote syslog allowed from: 'xxx.xxx.xxx.xxx/xx'
+2022/09/18 13:25:35 wazuh-remoted: INFO: Remote syslog allowed from: 'xxx.xxx.xxx.xxx/xx' END
+2022/09/18 13:25:35 wazuh-remoted: ACTION: none INFO: Remote syslog allowed from: 'xxx.xxx.xxx.xxx/xx'
